@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+	<title>Lojas Paxx</title>
+
+	<style>
+		body {
+		font-family:tahoma;
+		}
+	</style>
+
+	<script>
+		function Cadastro() {
+			var nome_cliente= document.getElementById("nome").value;
+			var endereco_cliente= document.getElementById("endereco").value;
+			var idade_cliente= document.getElementById("idade").value;
+			if document.getElementById("masculino").checked {
+				var sexo_cliente 'op1';
+			}
+			else {
+				var sexo_cliente'op2';
+				}
+			var dadosajax = {
+				'nome_cliente': nome_cliente,
+				'endereco_cliente': endereco_cliente,
+				'idade_cliente': idade_cliente,
+				'sexo_cliente': sexo_cliente
+				};
+
+			 var pageurl='gravacliente.php';
+			 $.ajax({
+			 	url:pageurl,
+			 	data:dadosajax,
+			 	type:'POST',
+			 	cache:false,
+			 	error.function(XMLHttpRequest, textstatus, errorThrown)
+			 		{
+			 		alert("Erro gravação cliente");
+			 		},
+			 	sucess.function(result)
+			 		{
+					alert ("Gravação efetuada com sucesso")
+					return
+					}	
+			 }
+		}
+	</script>
+</head>
+
+<body>
+	<form>
+		<h1>Cadastro de clientes</h1>
+		<p>Inclua as informações do cliente abaixo</p><p></p>
+		<font>Nome:</font></td>
+		<input type="text" id="nome"></input><p></p>
+		</tr>
+		<font>Endereço:</font>
+		<input type="text" id="endereco"></input><p></p>
+		<font>Idade:</font>
+		<input type="number" id="idade"></input><p></p>
+		<font>Sexo:</font>
+		<input type="radio" name="sexo" value="op1"> feminino 
+		<input type="radio" name="sexo" value="op2"> masculino
+		<br></br>
+		<input type="button" name="botao-ok" value="Cadastrar" id="botao_cadastra" onClick="Cadastro()"> <!--Atributo para função!-->
+		<input type="reset" name="apagar" value="Limpar" id="botao_limpa" onClick="Limpa()">
+	</form>
+
+</html>

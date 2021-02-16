@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+   <head>
+
+      <title>Lojas Super</title>
+
+      <script>
+
+        fuction Pesquisa() {
+
+         var nome_cliente =  document.getElementById("nome").value;
+
+         var dadosajax = {
+
+            'nome_cliente': nome_cliente
+
+         };
+
+         var pageurl = 'pesquisa_cliente.php';
+
+         $.ajax({
+
+            url: pageurl,
+
+            data: dadosajax,
+
+            type: 'POST',
+
+            cache: false,
+
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+
+               {
+
+                  alert(“Erro Gravação Cliente!!”);
+
+               },
+
+            success: function(result)
+
+               {
+
+                  document.getElementById("nome").value = result(0);
+
+                  document.getElementById("endereço").value = result(1);
+
+                  document.getElementById("idade").value = result(2);
+
+                  if (result(3) == “M”) 
+
+                     {
+
+                        document.getElementById("masculino").checked = True;
+
+                     }
+
+                  else
+
+                     {
+
+                        document.getElementById("feminino").checked = True;
+
+                     }
+
+                  }
+
+             }
+
+
+fuction Altera() {
+
+         var nome_cliente =  document.getElementById("nome").value;
+
+         var endereco_cliente =  document.getElementById("endereco").value;
+
+         var idade =  document.getElementById("idade").value;
+
+         if (document.getElementById("masculino").checked)
+
+            {
+
+               var sexo_cliente = “M”;
+
+            }
+
+               Else
+
+            {
+
+               var sexo_cliente = “F”;
+
+            }
+
+         }
+
+         var dadosajax = {
+
+            'nome_cliente': nome_cliente,
+
+            ‘endereco_cliente’: endereço_cliente,
+
+            ‘idade_cliente’: idade_cliente,
+
+            ‘sexo_cliente’: sexo_cliente
+            }
+
+         };
+
+         var pageurl = 'altera_cliente.php';
+
+         $.ajax({
+
+            url: pageurl,
+
+            data: dadosajax,
+
+            type: 'POST',
+
+            cache: false,
+
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+
+               {
+
+                  alert(“Erro Alteração Cliente!!”);
+
+               },
+
+            success: function(result)
+
+               {
+
+                  alert(“Alteração efetuada com sucesso”);  
+
+                  }
+
+             }
+
+
+           </script>
+
+   </head>
+
+   <body>
+
+      <h1>Alteração de Clientes</h1>
+
+      <p>Preencha o nome do cliente para efetuar a alteração</p>
+
+      <font> Nome do cliente: </font><p></p>
+
+      <input type="button" name="botao" value="Consultar" id="botao_consulta" onClick="Pesquisa()”>
+
+      <input type="text" id="nome"></input><p></p>
+
+      <font> Endereço do cliente: </font><p></p>
+
+      <input type="text" id="endereco"></input><p></p>
+
+      <font> Idade do cliente </font><p></p>
+
+      <input type="text" id="idade"></input><p></p>
+
+      <font> Sexo do cliente </font><p></p>
+
+      <font>Sexo:</font>
+         <input type="radio" name="sexo" value="op1"> feminino 
+         <input type="radio" name="sexo" value="op2"> masculino
+
+      <input type="button" name="botao" value="Consultar" id="botao_consulta" onClick="Altera()">
+
+   </body>
+
+</html>
